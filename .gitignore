@@ -31,3 +31,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Temporary scripts & data
+seed-*.js
+/public/docx_images/
+/*.pdf
+/public/*.pdf
+/public/*.docx
+supabase-schema.sql
+/catalogo-ref.pdf

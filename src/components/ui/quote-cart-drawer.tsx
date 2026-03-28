@@ -3,7 +3,7 @@
 import { useQuoteCart } from '@/contexts/quote-cart-context';
 import Link from 'next/link';
 
-const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '5500000000000';
+const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '553898416163';
 
 export default function QuoteCartDrawer() {
     const { items, removeItem, updateQuantity, clearCart, itemCount, total, getWhatsAppMessage, isOpen, setIsOpen } = useQuoteCart();

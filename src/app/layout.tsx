@@ -12,7 +12,7 @@ const jakarta = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
     title: 'Alto Mar Aquarismo - Corais, Peixes & Equipamentos',
-    description: 'Sua loja especializada em aquarismo marinho. Corais, peixes, invertebrados e equipamentos premium para seu reef.',
+    description: 'Sua loja especializada em aquarismo marinho. Corais, peixes, invertebrados e equipamentos selecionados para seu reef.',
 }
 
 export default function RootLayout({

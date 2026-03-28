@@ -5,12 +5,13 @@ import { usePathname } from 'next/navigation';
 
 export default function BottomNav() {
     const pathname = usePathname();
+    const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '553898416163';
 
     const navItems = [
         { name: 'Home', href: '/', icon: 'home' },
         { name: 'Catálogo', href: '/catalogo', icon: 'grid_view' },
         { name: 'Favoritos', href: '/favoritos', icon: 'favorite' },
-        { name: 'Contato', href: 'https://wa.me/5500000000000', icon: 'chat_bubble' }
+        { name: 'Contato', href: `https://wa.me/${WHATSAPP_NUMBER}`, icon: 'chat_bubble' }
     ];
 
     return (

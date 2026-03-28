@@ -2,11 +2,28 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import { icons } from 'lucide-react';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 import ProductCard from '@/components/ui/product-card';
 import { getCategories, getFeaturedProducts, getNewestProducts, getProducts } from '@/lib/data';
 import { Category, Product } from '@/types/database';
+
+function DynamicLucideIcon({ name }: { name: string }) {
+    if (!name) return <span className="material-symbols-outlined text-[28px] sm:text-[32px]">help</span>;
+    
+    // Converte kebab-case para CamelCase ou Capitalize
+    // Ex: "fish" -> "Fish", "settings" -> "Settings"
+    const camelName = name.replace(/-./g, x => x[1].toUpperCase()).replace(/^./, x => x.toUpperCase());
+    
+    const LucideIcon = (icons as any)[camelName];
+    
+    if (!LucideIcon) {
+        return <span className="material-symbols-outlined text-[28px] sm:text-[32px]">{name}</span>;
+    }
+    
+    return <LucideIcon className="w-7 h-7 sm:w-8 sm:h-8" strokeWidth={1.5} />;
+}
 
 export default function Home() {
     const [categories, setCategories] = useState<Category[]>([]);
@@ -112,9 +129,9 @@ export default function Home() {
                                     className="flex flex-col items-center gap-3 shrink-0 group"
                                 >
                                     <div className={`w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center transition-transform group-hover:scale-105 ${activeCategory === cat.slug ? 'ring-2 ring-primary ring-offset-2' : ''} ${colorClass}`}>
-                                        <span className="material-symbols-outlined text-[28px] sm:text-[32px]">{cat.icon}</span>
+                                        <DynamicLucideIcon name={cat.icon} />
                                     </div>
-                                    <span className="text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300">{cat.name}</span>
+                                    <span className="text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300 text-center">{cat.name}</span>
                                 </button>
                             );
                         })}

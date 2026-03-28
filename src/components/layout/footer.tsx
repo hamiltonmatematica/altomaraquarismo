@@ -3,6 +3,7 @@
 import Link from 'next/link';
 
 export default function Footer() {
+    const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '553898416163';
     return (
         <footer className="mt-20 border-t border-primary/10 bg-white dark:bg-slate-950 py-16 px-6">
             <div className="mx-auto max-w-7xl grid grid-cols-1 md:grid-cols-4 gap-12">
@@ -35,7 +36,7 @@ export default function Footer() {
                     <ul className="space-y-4 text-sm text-slate-500 font-medium">
                         <li><Link href="#" className="hover:text-primary transition-colors">Sobre Nós</Link></li>
                         <li><Link href="#" className="hover:text-primary transition-colors">Nossa Loja</Link></li>
-                        <li><a href="https://wa.me/5500000000000" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">Contato</a></li>
+                        <li><a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">Contato</a></li>
                     </ul>
                 </div>
                 <div>

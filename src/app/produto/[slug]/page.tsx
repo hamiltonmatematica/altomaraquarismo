@@ -9,7 +9,7 @@ import { useQuoteCart } from '@/contexts/quote-cart-context';
 import { getProductBySlug, getRelatedProducts, incrementProductClick } from '@/lib/data';
 import { Product } from '@/types/database';
 
-const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '5500000000000';
+const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '553898416163';
 
 export default function ProductPage({ params }: { params: { slug: string } }) {
     const [product, setProduct] = useState<Product | null>(null);
@@ -129,7 +129,11 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
                                             onClick={() => setActiveImage(idx)}
                                             className={`aspect-square rounded-xl overflow-hidden border-2 transition-all ${activeImage === idx ? 'border-primary shadow-lg' : 'border-transparent opacity-60 hover:opacity-100'}`}
                                         >
-                                            <img src={img.url} alt={`${product.name} ${idx + 1}`} className="w-full h-full object-cover" />
+                                            {img.url.toLowerCase().split('?')[0].match(/\.(mp4|mov|webm)$/) ? (
+                                                <video src={img.url} className="w-full h-full object-cover" muted playsInline />
+                                            ) : (
+                                                <img src={img.url} alt={`${product.name} ${idx + 1}`} className="w-full h-full object-cover" />
+                                            )}
                                         </button>
                                     ))}
                                 </div>
@@ -140,14 +144,31 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
                                 onMouseEnter={() => setShowZoom(true)}
                                 onMouseLeave={() => setShowZoom(false)}
                             >
-                                <img
-                                    src={mainImage}
-                                    alt={product.name}
-                                    className={`w-full h-full object-cover transition-transform duration-500 ${showZoom ? 'scale-[2.5]' : 'scale-100'}`}
-                                    style={showZoom ? {
-                                        transformOrigin: `${zoomPos.x}% ${zoomPos.y}%`
-                                    } : {}}
-                                />
+                                {mainImage ? (
+                                    mainImage.toLowerCase().split('?')[0].match(/\.(mp4|mov|webm)$/) ? (
+                                        <video
+                                            className="w-full h-full object-cover"
+                                            src={mainImage}
+                                            controls
+                                            muted
+                                            playsInline
+                                        />
+                                    ) : (
+                                        <img
+                                            src={mainImage}
+                                            alt={product.name}
+                                            className={`w-full h-full object-cover transition-transform duration-500 ${showZoom ? 'scale-[2.5]' : 'scale-100'}`}
+                                            style={showZoom ? {
+                                                transformOrigin: `${zoomPos.x}% ${zoomPos.y}%`
+                                            } : {}}
+                                        />
+                                    )
+                                ) : (
+                                    <div className="w-full h-full bg-slate-100 dark:bg-slate-800 flex flex-col items-center justify-center text-slate-400">
+                                        <span className="material-symbols-outlined text-6xl mb-2 opacity-30">shopping_bag</span>
+                                        <span className="text-sm font-medium uppercase tracking-widest opacity-50">Sem Foto</span>
+                                    </div>
+                                )}
 
                                 {product.tag && (
                                     <div className="absolute top-4 left-4">

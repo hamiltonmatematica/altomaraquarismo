@@ -17,12 +17,34 @@ export default function ProductCard({ product }: ProductCardProps) {
             href={`/produto/${product.slug}`}
             className="bg-white dark:bg-slate-900 rounded-[24px] md:rounded-3xl p-2.5 md:p-3 shadow-sm border border-slate-100 dark:border-slate-800 flex flex-col gap-2 md:gap-4 group cursor-pointer transition-all hover:shadow-xl hover:border-primary/20 relative"
         >
-            <div className="relative w-full aspect-square rounded-[18px] md:rounded-2xl overflow-hidden bg-background-light">
-                <img
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 md:group-hover:scale-110"
-                    alt={product.name}
-                    src={mainImage}
-                />
+            <div className="relative w-full aspect-square rounded-[18px] md:rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+                {mainImage ? (
+                    mainImage.toLowerCase().split('?')[0].match(/\.(mp4|mov|webm)$/) ? (
+                        <video
+                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 md:group-hover:scale-110"
+                            src={mainImage}
+                            muted
+                            loop
+                            playsInline
+                            onMouseEnter={(e) => e.currentTarget.play()}
+                            onMouseLeave={(e) => { e.currentTarget.pause(); e.currentTarget.currentTime = 0; }}
+                        />
+                    ) : (
+                        <img
+                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 md:group-hover:scale-110"
+                            alt={product.name}
+                            src={mainImage}
+                            onError={(e) => {
+                                (e.target as HTMLImageElement).src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDBwJSIgaGVpZ2h0PSIxMDBwJSI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iI2U1ZTdlYiIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIyNCIgZmlsbD0iIzlmYTZiMiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+U2VtIEZvdG88L3RleHQ+PC9zdmc+';
+                            }}
+                        />
+                    )
+                ) : (
+                    <div className="flex flex-col items-center justify-center text-slate-400">
+                        <span className="material-symbols-outlined text-4xl mb-1 opacity-50">shopping_bag</span>
+                        <span className="text-[10px] font-medium tracking-widest uppercase opacity-70">Sem Foto</span>
+                    </div>
+                )}
 
                 {product.tag && (
                     <div className="absolute top-2.5 md:top-3 left-2.5 md:left-3">
