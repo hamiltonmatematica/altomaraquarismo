@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { saveProduct, deleteProduct } from '@/lib/admin-actions';
+import { saveProductAction, deleteProductAction } from '@/lib/admin-actions';
 import { Product, Category } from '@/types/database';
 import { ChevronLeft, Save, Loader2, Trash2, Camera, Star, Plus } from 'lucide-react';
 import Link from 'next/link';
@@ -42,7 +42,7 @@ export default function ProductForm({ product, categories }: ProductFormProps) {
         };
 
         try {
-            await saveProduct(data, images);
+            await saveProductAction(data, images);
             router.push('/admin/produtos');
             router.refresh();
         } catch (err: any) {
@@ -80,7 +80,7 @@ export default function ProductForm({ product, categories }: ProductFormProps) {
                         type="button"
                         onClick={async () => {
                             if(confirm('Tem certeza?')) {
-                                await deleteProduct(product.id);
+                                await deleteProductAction(product.id);
                                 router.push('/admin/produtos');
                             }
                         }}
