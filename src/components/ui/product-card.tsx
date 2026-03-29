@@ -19,14 +19,16 @@ export default function ProductCard({ product }: ProductCardProps) {
         >
             <div className="relative w-full aspect-square rounded-[18px] md:rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
                 {mainImage ? (
-                    mainImage.toLowerCase().split('?')[0].match(/\.(mp4|mov|webm)$/) ? (
+                    mainImage.toLowerCase().split('?')[0].match(/\.(mp4|mov|webm|ogg|m4v)$/) ? (
                         <video
                             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 md:group-hover:scale-110"
                             src={mainImage}
                             muted
                             loop
                             playsInline
-                            onMouseEnter={(e) => e.currentTarget.play()}
+                            crossOrigin="anonymous"
+                            preload="metadata"
+                            onMouseEnter={(e) => e.currentTarget.play().catch(() => {})}
                             onMouseLeave={(e) => { e.currentTarget.pause(); e.currentTarget.currentTime = 0; }}
                         />
                     ) : (

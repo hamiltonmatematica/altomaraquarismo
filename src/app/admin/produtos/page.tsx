@@ -111,8 +111,8 @@ export default function AdminProdutosPage() {
                                 <div className="flex items-center gap-4">
                                     <div className="w-14 h-14 bg-slate-900 rounded-xl overflow-hidden flex-shrink-0 border border-slate-700">
                                         {mainImage ? (
-                                            mainImage.url.toLowerCase().split('?')[0].match(/\.(mp4|mov|webm)$/) ? (
-                                                <video src={mainImage.url} className="w-full h-full object-cover" muted playsInline />
+                                            mainImage.url.toLowerCase().split('?')[0].match(/\.(mp4|mov|webm|ogg|m4v)$/) ? (
+                                                <video src={mainImage.url} className="w-full h-full object-cover" muted playsInline preload="metadata" crossOrigin="anonymous" />
                                             ) : (
                                                 <img src={mainImage.url} alt={p.name} className="w-full h-full object-cover" />
                                             )

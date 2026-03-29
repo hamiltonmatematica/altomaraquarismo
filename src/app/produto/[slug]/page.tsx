@@ -129,8 +129,8 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
                                             onClick={() => setActiveImage(idx)}
                                             className={`aspect-square rounded-xl overflow-hidden border-2 transition-all ${activeImage === idx ? 'border-primary shadow-lg' : 'border-transparent opacity-60 hover:opacity-100'}`}
                                         >
-                                            {img.url.toLowerCase().split('?')[0].match(/\.(mp4|mov|webm)$/) ? (
-                                                <video src={img.url} className="w-full h-full object-cover" muted playsInline />
+                                            {img.url.toLowerCase().split('?')[0].match(/\.(mp4|mov|webm|ogg|m4v)$/) ? (
+                                                <video src={img.url} className="w-full h-full object-cover" muted playsInline preload="metadata" crossOrigin="anonymous" />
                                             ) : (
                                                 <img src={img.url} alt={`${product.name} ${idx + 1}`} className="w-full h-full object-cover" />
                                             )}
@@ -145,13 +145,15 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
                                 onMouseLeave={() => setShowZoom(false)}
                             >
                                 {mainImage ? (
-                                    mainImage.toLowerCase().split('?')[0].match(/\.(mp4|mov|webm)$/) ? (
+                                    mainImage.toLowerCase().split('?')[0].match(/\.(mp4|mov|webm|ogg|m4v)$/) ? (
                                         <video
                                             className="w-full h-full object-cover"
                                             src={mainImage}
                                             controls
                                             muted
                                             playsInline
+                                            preload="auto"
+                                            crossOrigin="anonymous"
                                         />
                                     ) : (
                                         <img

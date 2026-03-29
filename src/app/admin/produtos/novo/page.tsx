@@ -368,8 +368,8 @@ function NovoProdutoContent() {
                     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
                         {images.map((img, index) => (
                             <div key={index} className="group relative aspect-square bg-slate-900 rounded-2xl overflow-hidden border-2 border-slate-700 hover:border-cyan-500 transition-all">
-                                {(img as any).type === 'video' || img.url.toLowerCase().split('?')[0].match(/\.(mp4|mov)$/) ? (
-                                    <video src={img.url} className="w-full h-full object-cover" muted playsInline />
+                                {(img as any).type === 'video' || img.url.toLowerCase().split('?')[0].match(/\.(mp4|mov|webm|ogg|m4v)$/) ? (
+                                    <video src={img.url} className="w-full h-full object-cover" muted playsInline preload="metadata" crossOrigin="anonymous" />
                                 ) : (
                                     <img src={img.url} alt={`Preview ${index}`} className="w-full h-full object-cover" />
                                 )}
