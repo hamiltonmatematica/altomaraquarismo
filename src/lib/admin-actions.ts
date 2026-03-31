@@ -53,7 +53,11 @@ export async function uploadProductImageAction(formData: FormData): Promise<{ pu
         // supabaseAdmin usa service_role_key, ignorando regras de Storage RLS
         const { error: uploadError } = await supabaseAdmin.storage
             .from('products')
-            .upload(fileName, file, { cacheControl: '3600', upsert: false });
+            .upload(fileName, file, { 
+                cacheControl: '3600', 
+                upsert: false,
+                contentType: file.type || undefined
+            });
 
         if (uploadError) return { publicUrl: null, error: uploadError.message };
 
@@ -98,6 +102,7 @@ export async function saveProductAction(product: any, imagesUrl: string[]): Prom
         revalidatePath('/admin/produtos');
         revalidatePath('/catalogo');
         revalidatePath('/');
+        revalidatePath('/produto/[slug]', 'page');
         return { error: null };
     } catch (err: any) {
         return { error: err.message };

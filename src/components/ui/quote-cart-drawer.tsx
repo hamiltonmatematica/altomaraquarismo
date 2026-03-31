@@ -49,7 +49,7 @@ export default function QuoteCartDrawer() {
                                     <div className="flex-1 min-w-0">
                                         <h4 className="font-bold text-sm truncate">{item.product.name}</h4>
                                         {item.product.code && <p className="text-xs text-slate-400">{item.product.code}</p>}
-                                        <p className="text-primary font-black text-sm mt-1">R$ {item.product.price.toFixed(2)}</p>
+                                        <p className="text-primary font-black text-sm mt-1">R$ {item.product.price.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
                                         <div className="flex items-center gap-2 mt-2">
                                             <button
                                                 onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
@@ -78,7 +78,7 @@ export default function QuoteCartDrawer() {
                     <div className="p-6 border-t border-slate-200 dark:border-slate-800 space-y-4">
                         <div className="flex items-center justify-between">
                             <span className="text-slate-500 font-medium">Total estimado:</span>
-                            <span className="text-2xl font-black text-primary">R$ {total.toFixed(2)}</span>
+                            <span className="text-2xl font-black text-primary">R$ {total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                         </div>
 
                         <button

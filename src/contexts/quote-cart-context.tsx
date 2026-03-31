@@ -84,9 +84,9 @@ export function QuoteCartProvider({ children }: { children: React.ReactNode }) {
             msg += `${idx + 1}. *${item.product.name}*\n`;
             if (item.product.code) msg += `   Código: ${item.product.code}\n`;
             msg += `   Quantidade: ${item.quantity}\n`;
-            msg += `   Valor unitário: R$ ${item.product.price.toFixed(2)}\n\n`;
+            msg += `   Valor unitário: R$ ${item.product.price.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}\n\n`;
         });
-        msg += `*Total estimado: R$ ${total.toFixed(2)}*\n\n`;
+        msg += `*Total estimado: R$ ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}*\n\n`;
         msg += `Aguardo o retorno. Obrigado(a)!`;
         return msg;
     }, [items, total]);

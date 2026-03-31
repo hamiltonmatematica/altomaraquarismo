@@ -74,7 +74,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
 
     const handleWhatsAppSingle = () => {
         const msg = encodeURIComponent(
-            `Olá! Gostaria de solicitar um orçamento para:\n\n*${product.name}*\n${product.code ? `Código: ${product.code}\n` : ''}Quantidade: ${quantity}\nValor unitário: R$ ${product.price.toFixed(2)}\n\nAguardo retorno!`
+            `Olá! Gostaria de solicitar um orçamento para:\n\n*${product.name}*\n${product.code ? `Código: ${product.code}\n` : ''}Quantidade: ${quantity}\nValor unitário: R$ ${product.price.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}\n\nAguardo retorno!`
         );
         window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, '_blank');
     };
@@ -174,7 +174,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
 
                                 {product.tag && (
                                     <div className="absolute top-4 left-4">
-                                        <span className="rounded-full bg-primary px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-white shadow-lg">
+                                        <span className={`rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-white shadow-lg ${product.tag.toLowerCase() === 'promoção' ? 'bg-red-600' : 'bg-primary'}`}>
                                             {product.tag}
                                         </span>
                                     </div>
@@ -191,7 +191,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
                                 {product.name}
                             </h1>
                             <p className="text-3xl font-black text-primary mb-2">
-                                R$ {product.price.toFixed(2)}
+                                R$ {product.price.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                             </p>
                             <div className="h-1 w-16 bg-primary/20 rounded-full mb-6" />
 

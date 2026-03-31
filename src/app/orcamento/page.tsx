@@ -86,7 +86,7 @@ export default function OrcamentoPage() {
                                                         >+</button>
                                                     </div>
                                                     <p className="text-lg font-black text-primary">
-                                                        R$ {(item.product.price * item.quantity).toFixed(2)}
+                                                        R$ {(item.product.price * item.quantity).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                                                     </p>
                                                 </div>
                                             </div>
@@ -103,7 +103,7 @@ export default function OrcamentoPage() {
                                         {items.map(item => (
                                             <div key={item.product.id} className="flex justify-between">
                                                 <span className="text-slate-500 truncate mr-2">{item.product.name} × {item.quantity}</span>
-                                                <span className="font-bold flex-shrink-0">R$ {(item.product.price * item.quantity).toFixed(2)}</span>
+                                                <span className="font-bold flex-shrink-0">R$ {(item.product.price * item.quantity).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                                             </div>
                                         ))}
                                     </div>
@@ -111,7 +111,7 @@ export default function OrcamentoPage() {
                                     <div className="border-t border-slate-200 dark:border-slate-800 pt-4">
                                         <div className="flex items-center justify-between">
                                             <span className="font-bold text-lg">Total estimado:</span>
-                                            <span className="text-2xl font-black text-primary">R$ {total.toFixed(2)}</span>
+                                            <span className="text-2xl font-black text-primary">R$ {total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                                         </div>
                                     </div>
 

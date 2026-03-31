@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Logo from '@/components/ui/logo';
 
 export default function Footer() {
     const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '553898416163';
@@ -9,15 +10,7 @@ export default function Footer() {
             <div className="mx-auto max-w-7xl grid grid-cols-1 md:grid-cols-4 gap-12">
                 <div className="col-span-1 md:col-span-1">
                     <div className="mb-6">
-                        <Link href="/" className="flex items-center gap-2">
-                            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center shadow-lg shadow-cyan-500/30">
-                                <span className="material-symbols-outlined text-white text-xl">waves</span>
-                            </div>
-                            <div className="flex flex-col leading-none">
-                                <span className="text-xl font-black bg-gradient-to-r from-cyan-600 to-blue-700 bg-clip-text text-transparent">Alto Mar</span>
-                                <span className="text-[8px] font-bold uppercase tracking-[3px] text-slate-400">Aquarismo</span>
-                            </div>
-                        </Link>
+                        <Logo />
                     </div>
                     <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
                         Sua loja especializada em aquarismo marinho. Corais, peixes, invertebrados e equipamentos selecionados para seu reef.

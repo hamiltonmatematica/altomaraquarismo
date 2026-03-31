@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { createClient } from '@/utils/supabase/client'
 import { useRouter } from 'next/navigation'
 import { Waves, Loader2, LogIn } from 'lucide-react'
+import Image from 'next/image'
 
 export default function LoginPage() {
     const [email, setEmail] = useState('')
@@ -40,11 +41,17 @@ export default function LoginPage() {
             </div>
 
             <div className="max-w-md w-full relative">
-                <div className="text-center mb-10">
-                    <div className="inline-flex items-center justify-center p-4 bg-blue-600 rounded-3xl shadow-xl shadow-blue-500/20 mb-6">
-                        <Waves className="w-10 h-10 text-white" />
+                <div className="text-center mb-10 flex flex-col items-center">
+                    <div className="mb-6">
+                        <Image 
+                            src="/LOGO - transparente.png" 
+                            alt="Alto Mar Aquarismo" 
+                            width={160} 
+                            height={60}
+                            className="object-contain"
+                            priority
+                        />
                     </div>
-                    <h1 className="text-4xl font-black text-white tracking-tight">Alto Mar</h1>
                     <p className="text-slate-400 font-medium">Painel Administrativo</p>
                 </div>
 

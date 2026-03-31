@@ -93,7 +93,7 @@ export default function Header() {
                                                         </h4>
                                                         <div className="flex items-center gap-2">
                                                             <span className="text-[10px] text-slate-400 font-medium">{product.code}</span>
-                                                            <span className="text-[10px] text-primary font-black">R$ {product.price.toFixed(2)}</span>
+                                                            <span className="text-[10px] text-primary font-black">R$ {product.price.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                                                         </div>
                                                     </div>
                                                     <span className="material-symbols-outlined text-slate-300 text-sm group-hover:translate-x-1 transition-transform">chevron_right</span>

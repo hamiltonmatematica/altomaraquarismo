@@ -50,7 +50,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
                 {product.tag && (
                     <div className="absolute top-2.5 md:top-3 left-2.5 md:left-3">
-                        <span className="rounded-full bg-primary px-2 py-0.5 md:px-3 md:py-1 text-[9px] md:text-[10px] font-bold uppercase tracking-wider text-white shadow-lg">
+                        <span className={`rounded-full px-2 py-0.5 md:px-3 md:py-1 text-[9px] md:text-[10px] font-bold uppercase tracking-wider text-white shadow-lg ${product.tag.toLowerCase() === 'promoção' ? 'bg-red-600' : 'bg-primary'}`}>
                             {product.tag}
                         </span>
                     </div>
@@ -80,7 +80,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                 <div className="flex items-center justify-between mt-1 md:mt-3">
                     <div className="flex flex-col md:flex-row md:items-baseline">
                         <div className="flex items-baseline gap-1">
-                            <span className="font-black text-primary text-sm md:text-xl">R$ {product.price.toFixed(2)}</span>
+                            <span className="font-black text-primary text-sm md:text-xl">R$ {product.price.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                         </div>
                     </div>
                     <button
