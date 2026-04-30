@@ -3,20 +3,50 @@
 import { supabaseAdmin } from './supabase';
 import { revalidatePath } from 'next/cache';
 
-export async function createNewUser(email: string) {
+/** Cria usuário com nome, email e senha - sem confirmação de email */
+export async function createNewUser(email: string, password: string, name: string) {
     if (!supabaseAdmin) throw new Error('Supabase admin não configurado');
 
-    // Cria o usuário via Admin API (isso envia o convite por e-mail automaticamente se configurado no Supabase)
-    // Se o invite estiver desligado, o usuário é criado mas não consegue logar até ter senha.
-    // Usaremos invite para que ele defina sua própria senha.
-    
-    const { error } = await supabaseAdmin.auth.admin.inviteUserByEmail(email, {
-        redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback?next=/admin/perfil`,
+    const { data, error } = await supabaseAdmin.auth.admin.createUser({
+        email,
+        password,
+        email_confirm: true, // confirma imediatamente, sem email
+        user_metadata: { full_name: name },
     });
 
     if (error) throw error;
 
     revalidatePath('/admin/usuarios');
+    return data.user;
+}
+
+/** Envia link de reset de senha para o email do usuário */
+export async function sendPasswordReset(email: string): Promise<void> {
+    if (!supabaseAdmin) throw new Error('Supabase admin não configurado');
+
+    const { error } = await supabaseAdmin.auth.resetPasswordForEmail(email, {
+        redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback?next=/admin/perfil`,
+    });
+
+    if (error) throw error;
+}
+
+/** Gera uma senha temporária aleatória e aplica diretamente no usuário */
+export async function generateTempPassword(userId: string): Promise<string> {
+    if (!supabaseAdmin) throw new Error('Supabase admin não configurado');
+
+    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789@#!';
+    const tempPassword = Array.from({ length: 12 }, () =>
+        chars[Math.floor(Math.random() * chars.length)]
+    ).join('');
+
+    const { error } = await supabaseAdmin.auth.admin.updateUserById(userId, {
+        password: tempPassword,
+    });
+
+    if (error) throw error;
+
+    return tempPassword;
 }
 
 export async function listAuthUsers() {
